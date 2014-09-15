@@ -5,25 +5,27 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.ArrayAdapter;
 
+import com.example.dx195.androidbootcamp.Model.Game;
 import com.example.dx195.androidbootcamp.Model.Team;
+import com.example.dx195.androidbootcamp.Services.AllTeamsDataService;
 import com.example.dx195.androidbootcamp.Services.TopTeamService;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Hashtable;
 
 
 public class FootballScheduleActivity extends Activity {
 
     ListView topTeamList;
+    ArrayList<Team> topTeams;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_football_schedule);
 
+        //get list of the top 25 NCAA football teams
         topTeamList = (ListView) findViewById(R.id.listView);
         TopTeamService requestTopTeams = new TopTeamService(this);
         requestTopTeams.makeRequest();
@@ -49,10 +51,30 @@ public class FootballScheduleActivity extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
-    // Update the display after with the response
-    public void setTeams(ArrayList<Team>teams) {
+    // Get the response for the top 25 teams.
+    public void setTeams(ArrayList<Team> teams) {
+        topTeams = teams;
         ListArrayAdapter adapter = new ListArrayAdapter(this, teams);
         topTeamList.setAdapter(adapter);
+
+        //GameScheduleService requestGameSchedule = new GameScheduleService(this);
+        //requestGameSchedule.makeRequest();
+    }
+
+    public void setGames(ArrayList<Game> games) {
+        filterGames(games);
+
+        //Request Data on all the teams
+        AllTeamsDataService requestAllTeamsData = new AllTeamsDataService(this);
+        requestAllTeamsData.makeRequest();
+    }
+
+    public void setAllTeamsData(Hashtable<String,Team> allTeams) {
+
+    }
+
+    // Filter the scheduled games by the top 25 teams
+    private void filterGames(ArrayList<Game> games) {
 
     }
 }

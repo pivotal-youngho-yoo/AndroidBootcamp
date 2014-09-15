@@ -12,28 +12,28 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 
-import java.util.ArrayList;
+import java.util.Hashtable;
 
 /**
- * Created by dx195 on 9/11/14.
+ * Created by younghoyoo on 2014-09-14.
  */
-public class TopTeamService {
-    static final String TOP_TEAM_URL = "http://api.sportsdatallc.org/ncaafb-t1/polls/AP25/2014/2/rankings.json?api_key=ztkk39s99j7j4facu8b5cnk3";
+public class AllTeamsDataService {
+    static final String ALL_TEAMS_DATA_URL = "http://api.sportsdatallc.org/ncaafb-t1/teams/FBS/hierarchy.json?api_key=jmtzp6kchp9n9vka5s7e6hje";
     FootballScheduleActivity display;
 
-    public TopTeamService(FootballScheduleActivity display) {
+    public AllTeamsDataService(FootballScheduleActivity display) {
         this.display = display;
     }
 
     public void makeRequest() {
-        new AsyncCall().execute(TOP_TEAM_URL);
+        new AsyncCall().execute(ALL_TEAMS_DATA_URL);
     }
 
-    private class AsyncCall extends AsyncTask<String, Integer, ArrayList<Team>> {
+    private class AsyncCall extends AsyncTask<String, Integer, Hashtable<String,Team>> {
 
         @Override
-        protected ArrayList<Team> doInBackground(String... arg0) {
-            ArrayList<Team> teams = new ArrayList<Team>();
+        protected Hashtable<String, Team> doInBackground(String... arg0) {
+            Hashtable<String, Team> teams = new Hashtable<String, Team>();
             String url = arg0[0];
 
             try {
@@ -45,7 +45,7 @@ public class TopTeamService {
 
                 // Parse the JSON Object
                 if (httpEntity != null) {
-                    teams = TopTeamServiceParser.parseTopTeams(httpEntity);
+                    teams = AllTeamsDataServiceParser.parseAllTeamsData(httpEntity);
                 }
 
             } catch(Exception e) {
@@ -55,10 +55,9 @@ public class TopTeamService {
             return teams;
         }
 
-        protected void onPostExecute(ArrayList<Team> teams) {
+        protected void onPostExecute(Hashtable<String,Team> teams) {
             super.onPostExecute(teams);
-            display.setTeams(teams);
+            display.setAllTeamsData(teams);
         }
     }
-
 }

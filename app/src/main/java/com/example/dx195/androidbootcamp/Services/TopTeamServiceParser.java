@@ -1,19 +1,17 @@
 package com.example.dx195.androidbootcamp.Services;
 
+import android.util.Log;
+
 import com.example.dx195.androidbootcamp.Model.Team;
 
 import org.apache.http.HttpEntity;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-
-import java.io.InputStream;
 import java.io.BufferedReader;
+import java.io.InputStream;
 import java.io.InputStreamReader;
-
-import android.util.Log;
+import java.util.ArrayList;
 
 /**
  * Created by dx195 on 9/11/14.
@@ -21,7 +19,7 @@ import android.util.Log;
 public class TopTeamServiceParser {
 
     public static ArrayList<Team> parseTopTeams(HttpEntity httpEntity) {
-        ArrayList teams = new ArrayList<Team>();
+        ArrayList<Team> teams = new ArrayList<Team>();
         try {
             //Build the JSON String
             InputStream inputStream = httpEntity.getContent();
