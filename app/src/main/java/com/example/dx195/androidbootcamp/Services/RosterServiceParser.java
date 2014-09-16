@@ -2,7 +2,7 @@ package com.example.dx195.androidbootcamp.Services;
 
 import android.util.Log;
 
-import com.example.dx195.androidbootcamp.Model.Team;
+import com.example.dx195.androidbootcamp.Model.Player;
 
 import org.apache.http.HttpEntity;
 import org.json.JSONArray;
@@ -14,12 +14,11 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 /**
- * Created by dx195 on 9/11/14.
+ * Created by younghoyoo on 2014-09-15.
  */
-public class TopTeamServiceParser {
-
-    public static ArrayList<Team> parseTopTeams(HttpEntity httpEntity) {
-        ArrayList<Team> teams = new ArrayList<Team>();
+public class RosterServiceParser {
+    public static ArrayList<Player> parseRoster(HttpEntity httpEntity) {
+        ArrayList<Player> players = new ArrayList<Player>();
         try {
             //Build the JSON String
             InputStream inputStream = httpEntity.getContent();
@@ -31,20 +30,19 @@ public class TopTeamServiceParser {
             }
             JSONObject jsonObject = new JSONObject(jsonString.toString());
 
-            JSONArray jsonTeams = jsonObject.getJSONArray("rankings");
-            for(int i = 0; i < jsonTeams.length(); i++) {
-                JSONObject team = jsonTeams.getJSONObject(i);
+            JSONArray jsonRoster = jsonObject.getJSONArray("players");
+            for(int i = 0; i < jsonRoster.length(); i++) {
+                JSONObject player = jsonRoster.getJSONObject(i);
 
-                String teamId = team.getString("id");
-                String teamMarket = team.getString("market");
-                String teamName = team.getString("name");
-                int teamRank = team.getInt("rank");
+                String name = player.getString("name");
+                String position = player.getString("position");
+                int jerseyNumber = player.getInt("jersey");
 
-                teams.add(new Team(teamId, teamMarket, teamName, teamRank));
+                players.add(new Player(name, position, jerseyNumber));
             }
         } catch (Exception e) {
             Log.e("ERROR PARSING TOP TEAMS", e.getMessage());
         }
-        return teams;
+        return players;
     }
 }

@@ -1,13 +1,13 @@
 package com.example.dx195.androidbootcamp;
 
-import com.example.dx195.androidbootcamp.Model.Team;
-
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 import android.widget.ArrayAdapter;
-import android.content.Context;
+import android.widget.TextView;
+
+import com.example.dx195.androidbootcamp.Model.Team;
 
 import java.util.ArrayList;
 
@@ -19,7 +19,7 @@ public class ListArrayAdapter extends ArrayAdapter<Team> {
     private Context context;
 
     public ListArrayAdapter(Context context, ArrayList<Team> teams) {
-        super(context, R.layout.scheduled_game_item, teams);
+        super(context, R.layout.team_cell, teams);
         this.teams = teams;
         this.context = context;
     }
@@ -29,9 +29,9 @@ public class ListArrayAdapter extends ArrayAdapter<Team> {
         Team team = teams.get(position);
 
         LayoutInflater layoutInflater = LayoutInflater.from(context);
-        convertView = layoutInflater.inflate(R.layout.scheduled_game_item, parent, false);
-        TextView title = (TextView) convertView.findViewById(R.id.homeTeam);
-        title.setText(team.getMarketName());
+        convertView = layoutInflater.inflate(R.layout.team_cell, parent, false);
+        TextView title = (TextView) convertView.findViewById(R.id.teamName);
+        title.setText(team.getRank() + ". " +team.getMarketName());
 
         return convertView;
     }

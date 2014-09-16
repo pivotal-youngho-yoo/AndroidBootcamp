@@ -3,7 +3,7 @@ package com.example.dx195.androidbootcamp.Services;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import com.example.dx195.androidbootcamp.FootballScheduleActivity;
+import com.example.dx195.androidbootcamp.Activity.TopTeamActivity;
 import com.example.dx195.androidbootcamp.Model.Team;
 
 import org.apache.http.HttpEntity;
@@ -19,9 +19,9 @@ import java.util.ArrayList;
  */
 public class TopTeamService {
     static final String TOP_TEAM_URL = "http://api.sportsdatallc.org/ncaafb-t1/polls/AP25/2014/2/rankings.json?api_key=ztkk39s99j7j4facu8b5cnk3";
-    FootballScheduleActivity display;
+    TopTeamActivity display;
 
-    public TopTeamService(FootballScheduleActivity display) {
+    public TopTeamService(TopTeamActivity display) {
         this.display = display;
     }
 

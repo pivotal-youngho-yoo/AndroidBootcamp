@@ -7,11 +7,13 @@ public class Team {
     private String id;
     private String marketName;
     private String teamName;
+    private int rank;
 
-    public Team(String id, String marketName, String teamName) {
+    public Team(String id, String marketName, String teamName, int rank) {
         this.id = id;
         this.marketName = marketName;
         this.teamName = teamName;
+        this.rank = rank;
     }
 
     public String getId() {
@@ -25,4 +27,6 @@ public class Team {
     public String getTeamName() {
         return teamName;
     }
+
+    public int getRank() { return rank; }
 }
