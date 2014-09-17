@@ -30,8 +30,14 @@ public class RosterArrayAdapter extends ArrayAdapter<Player> {
 
         LayoutInflater layoutInflater = LayoutInflater.from(context);
         convertView = layoutInflater.inflate(R.layout.player_cell, parent, false);
-        TextView title = (TextView) convertView.findViewById(R.id.playerInfo);
-        title.setText(player.getJerseyNumber() + " " + player.getPosition() + " " + player.getName());
+        TextView playerName = (TextView) convertView.findViewById(R.id.playerName);
+        playerName.setText(player.getName());
+
+        TextView playerNumber = (TextView) convertView.findViewById(R.id.playerNumber);
+        playerNumber.setText(String.valueOf(player.getJerseyNumber()));
+
+        TextView playerPosition = (TextView) convertView.findViewById(R.id.playerPosition);
+        playerPosition.setText(player.getPosition());
 
         return convertView;
     }

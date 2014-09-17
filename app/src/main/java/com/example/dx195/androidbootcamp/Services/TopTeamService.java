@@ -43,6 +43,8 @@ public class TopTeamService {
                 HttpResponse response = client.execute(request);
                 HttpEntity httpEntity = response.getEntity();
 
+
+
                 // Parse the JSON Object
                 if (httpEntity != null) {
                     teams = TopTeamServiceParser.parseTopTeams(httpEntity);

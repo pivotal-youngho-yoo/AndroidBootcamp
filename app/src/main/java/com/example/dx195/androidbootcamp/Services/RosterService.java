@@ -18,15 +18,19 @@ import java.util.ArrayList;
  * Created by younghoyoo on 2014-09-15.
  */
 public class RosterService {
-    static final String ROSTER_URL = "http://api.sportsdatallc.org/ncaafb-t1/teams/OSU/2014/REG/statistics.json?api_key=jmtzp6kchp9n9vka5s7e6hje";
+    static final String ROSTER_URL_BASE = "http://api.sportsdatallc.org/ncaafb-t1/teams/";
+    static final String ROSTER_URL = "/2014/REG/statistics.json?api_key=jmtzp6kchp9n9vka5s7e6hje";
+    String teamId;
+
     RosterActivity display;
 
-    public RosterService(RosterActivity display) {
+    public RosterService(RosterActivity display, String teamId) {
         this.display = display;
+        this.teamId = teamId;
     }
 
     public void makeRequest() {
-        new AsyncCall().execute(ROSTER_URL);
+        new AsyncCall().execute(ROSTER_URL_BASE + teamId  + ROSTER_URL);
     }
 
     private class AsyncCall extends AsyncTask<String, Integer, ArrayList<Player>> {

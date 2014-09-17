@@ -22,10 +22,16 @@ public class RosterActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.player_cell);
+        setContentView(R.layout.activity_roster_list);
+        rosterList = (ListView) findViewById(R.id.rosterListView);
+        String teamId = "";
 
-        rosterList = (ListView) findViewById(R.id.listView);
-        RosterService requestRoster = new RosterService(this);
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            teamId = extras.getString("teamId");
+        }
+
+        RosterService requestRoster = new RosterService(this, teamId);
         requestRoster.makeRequest();
     }
 

@@ -1,20 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+    android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:weightSum="1">
 
     <TextView
-        android:layout_width="match_parent"
+        android:layout_width="200dip"
         android:layout_height="80dip"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="New Text"
         android:gravity="center_vertical"
         android:paddingLeft="20dip"
         android:paddingRight="20dip"
-        android:id="@+id/playerInfo">
+        android:id="@+id/playerName">
+    </TextView>
+
+    <TextView
+        android:layout_width="80dip"
+        android:layout_height="80dip"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="New Text"
+        android:gravity="center_vertical"
+        android:paddingLeft="20dip"
+        android:paddingRight="20dip"
+        android:id="@+id/playerNumber">
+    </TextView>
+
+    <TextView
+        android:layout_width="80dip"
+        android:layout_height="80dip"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="New Text"
+        android:gravity="center_vertical"
+        android:paddingLeft="20dip"
+        android:paddingRight="20dip"
+        android:id="@+id/playerPosition">
     </TextView>
 
 </LinearLayout>

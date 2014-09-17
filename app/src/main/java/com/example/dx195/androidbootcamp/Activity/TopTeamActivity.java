@@ -63,6 +63,7 @@ public class TopTeamActivity extends Activity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(TopTeamActivity.this, RosterActivity.class);
+                intent.putExtra("teamId", topTeams.get(position).getId());
                 startActivity(intent);
             }
         });
