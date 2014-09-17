@@ -4,7 +4,9 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 
 import com.example.dx195.androidbootcamp.Model.Player;
 import com.example.dx195.androidbootcamp.R;
@@ -17,6 +19,7 @@ import java.util.ArrayList;
 public class RosterActivity extends Activity {
 
     ListView rosterList;
+    ProgressBar loadingRosterProgressBar;
     ArrayList<Player> roster;
 
     @Override
@@ -30,6 +33,9 @@ public class RosterActivity extends Activity {
         if (extras != null) {
             teamId = extras.getString("teamId");
         }
+
+        loadingRosterProgressBar = (ProgressBar) findViewById(R.id.rosterProgressBar);
+        loadingRosterProgressBar.setVisibility(View.VISIBLE);
 
         RosterService requestRoster = new RosterService(this, teamId);
         requestRoster.makeRequest();
@@ -54,6 +60,8 @@ public class RosterActivity extends Activity {
 
     public void setRoster(ArrayList<Player> players) {
         roster = players;
+
+        loadingRosterProgressBar.setVisibility(View.GONE);
         RosterArrayAdapter adapter = new RosterArrayAdapter(this, players);
         rosterList.setAdapter(adapter);
     }

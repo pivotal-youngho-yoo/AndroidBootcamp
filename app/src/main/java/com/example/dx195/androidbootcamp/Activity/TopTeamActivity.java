@@ -8,6 +8,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 
 import com.example.dx195.androidbootcamp.ListArrayAdapter;
 import com.example.dx195.androidbootcamp.Model.Team;
@@ -20,6 +21,7 @@ import java.util.ArrayList;
 public class TopTeamActivity extends Activity {
 
     ListView topTeamList;
+    ProgressBar progressBar;
     ArrayList<Team> topTeams;
 
     @Override
@@ -30,6 +32,10 @@ public class TopTeamActivity extends Activity {
         //get list of the top 25 NCAA football teams
         topTeamList = (ListView) findViewById(R.id.listView);
         TopTeamService requestTopTeams = new TopTeamService(this);
+
+        progressBar = (ProgressBar) findViewById(R.id.teamListProgressBar);
+        progressBar.setVisibility(View.VISIBLE);
+
         requestTopTeams.makeRequest();
     }
 
@@ -53,6 +59,7 @@ public class TopTeamActivity extends Activity {
 
     // Receive the response for the top 25 teams.
     public void setTeams(ArrayList<Team> teams) {
+        progressBar.setVisibility(View.GONE);
         topTeams = teams;
         ListArrayAdapter adapter = new ListArrayAdapter(this, teams);
         topTeamList.setAdapter(adapter);
